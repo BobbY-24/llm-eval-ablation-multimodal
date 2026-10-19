@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "template_id": "stage2-grounding-v1",
+  "status": "frozen_design_not_yet_run",
+  "renders_from": "inputs.jsonl row.input only; gold, annotation rows, inventory definitions and candidate metadata are never inputs",
+  "system": "You judge short gameplay evidence from {game}. Use only the supplied evidence. Answer INSUFFICIENT when the evidence cannot settle the question, including when something important is out of view or not shown. Reply with one JSON object and nothing else.",
+  "frames_preamble": "Frames from one clip, in time order. Each frame is labelled with its source timestamp in seconds.",
+  "text_evidence_preamble": "Written observation of the same clip:",
+  "label_question": {
+    "jargon": "Question: does this evidence show {expression}, as players of {game} use that term?",
+    "plain": "Question: does this evidence show {expression}?"
+  },
+  "label_instructions": "Clip span: {start_seconds} to {end_seconds} seconds (source clock). Reply with JSON: {{\"label\": one of {label_options}, \"event_interval_seconds\": [start, end] in source seconds or null, \"confidence\": a probability from 0 to 1}}.",
+  "property_question": "For this clip, answer each question below with one of its listed values, or \"insufficient\" if the evidence cannot settle it. Reply with JSON: {{\"critical_properties\": {{key: value}}}}.",
+  "label_response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["label", "event_interval_seconds", "confidence"],
+    "properties": {
+      "label": {"type": "string", "enum": ["PRESENT", "ABSENT", "INSUFFICIENT"]},
+      "event_interval_seconds": {"anyOf": [{"type": "null"}, {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2}]},
+      "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+    }
+  },
+  "property_response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["critical_properties"],
+    "properties": {"critical_properties": {"type": "object", "additionalProperties": {"type": "string"}}}
+  }
+}

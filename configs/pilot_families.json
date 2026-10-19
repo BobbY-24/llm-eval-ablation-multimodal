@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "status": "draft_checklists_model_written_require_expert_review",
+  "created": "2026-10-10",
+  "notes": [
+    "Property keys and values are the canonical response vocabulary for property probes. Per-example values stay protected.",
+    "Visibility is a draft per-property judgement of what rendered gameplay frames can show. Reviewers must confirm it per example and per evidence arm.",
+    "telemetry_only properties cannot be recovered from pixels. If a label-decisive property is telemetry_only, the visual-only arms must be reviewed as INSUFFICIENT; use gold_by_condition and exclude the example from paired lexical claims.",
+    "Melee mechanics descriptions were transcribed offline from community knowledge and are unverified against game data in this project. AoE II families have no telemetry validator in this toolkit.",
+    "Inventory joins are thin. All five Melee senses have usages from one SSBWiki page (Mr. Game & Watch (SSBM)); most AoE senses come from one forum thread. The fighting-game glossary excerpt attributed to Melee 'wavedash' in GAME_TERM_INVENTORY_2026-10-06_EVIDENCE.csv describes the Tekken/MvC sense."
+  ],
+  "visibility_classes": {
+    "visible": "Decidable from rendered frames under the frozen frame-selection rule.",
+    "visible_native_rate_only": "Decidable from frames only if consecutive native 60 Hz frames around the defining transition are kept (key frame and predecessor are required in the selection).",
+    "context_dependent": "Visible only when the camera, framing or HUD shows it; reviewers mark per example.",
+    "telemetry_only": "Not in pixels: controller inputs or internal flags. Visual-only arms are INSUFFICIENT for this property by design.",
+    "not_observable": "Intent or strategy that neither frames nor telemetry establish; excluded from scoring."
+  },
+  "games": {
+    "Super Smash Bros. Melee": {"scope_id": "scope:050", "native_hz": 60, "telemetry_validator": "Slippi replay + melee_mining.py rules (constants unverified on real replays)"},
+    "Age of Empires II: Definitive Edition": {"scope_id": "scope:002", "native_hz": null, "telemetry_validator": "none in toolkit; aoc-mgz parsing not integrated"}
+  },
+  "families": {
+    "wavedash": {
+      "game": "Super Smash Bros. Melee",
+      "sense_id": "sense:d4d6ca6b86c65bf9714de62c:050",
+      "plain_description": "a jump that is cut short at once by an air dodge angled into the ground, so the character lands immediately and slides along the floor",
+      "detector_rule": "wavedash.v1",
+      "critical_properties": [
+        {"key": "starts_from_grounded_jump", "values": ["yes", "no"], "visibility": "visible_native_rate_only", "label_decisive": true, "telemetry": "KneeBend (24) entry before the airdodge", "note": "Jumpsquat lasts a few frames; uniform subsampling can erase it."},
+        {"key": "air_dodge_into_ground", "values": ["yes", "no"], "visibility": "visible_native_rate_only", "label_decisive": true, "telemetry": "EscapeAir (236) then LandingFallSpecial (43) within 8 frames"},
+        {"key": "slides_on_landing", "values": ["forward", "backward", "none"], "visibility": "visible", "label_decisive": false, "telemetry": "position.x change during LandingFallSpecial"}
+      ],
+      "near_miss_kinds": {"jump_airdodge_no_landing": "Jump then air dodge that does not land at once.", "waveland_without_jumpsquat": "Air dodge into the ground from a fall or platform, with no jump start."},
+      "wrong_context_sources": ["Tekken or Marvel vs. Capcom 'wavedash' footage (a different crouch-dash input sense)", "Super Smash Bros. Ultimate air-dodge landings"],
+      "visual_only_expectation": "Decidable if native-rate frames around jumpsquat, air dodge and landing are kept."
+    },
+    "L-cancel": {
+      "game": "Super Smash Bros. Melee",
+      "sense_id": "sense:9cf8a403aa21e3b2725cc91b:050",
+      "plain_description": "landing an aerial attack while pressing a shield button just before touching the ground, which halves the landing recovery time",
+      "detector_rule": "l_cancel.v1",
+      "critical_properties": [
+        {"key": "aerial_attack_landed", "values": ["yes", "no"], "visibility": "visible", "label_decisive": true, "telemetry": "AttackAir (65-69) to LandingAir (70-74)"},
+        {"key": "shield_input_before_landing", "values": ["yes", "no"], "visibility": "telemetry_only", "label_decisive": true, "telemetry": "L/R/Z physical buttons or analog trigger within 7 frames before landing", "note": "Not rendered unless an input-display overlay is captured; overlays would be privileged evidence and are excluded."},
+        {"key": "landing_lag_reduced", "values": ["yes", "no"], "visibility": "telemetry_only", "label_decisive": true, "telemetry": "Slippi post-frame L-cancel status (1 success, 2 fail) when present", "note": "In principle countable from native-rate landing frames with a per-move landing-lag table. Treat as telemetry_only unless an expert reviewer counts frames. Vanilla Melee is believed to show no success flash (unverified). Mr. Game & Watch cannot L-cancel most aerials (source quote)."}
+      ],
+      "near_miss_kinds": {"l_cancel_missed": "Aerial landing without a successful L-cancel.", "aerial_autocancel_landing": "Aerial ends before landing (normal landing state); nothing to cancel."},
+      "wrong_context_sources": ["Smash 64 Z-cancel footage", "Project M / Ultimate aerial landings"],
+      "visual_only_expectation": "Designed control: visual-only arms are expected to be INSUFFICIENT for PRESENT versus ABSENT."
+    },
+    "dashdancing": {
+      "game": "Super Smash Bros. Melee",
+      "sense_id": "sense:4a62a8139aa4f83e7da0da03:050",
+      "plain_description": "repeatedly starting a dash and reversing direction within the opening dash, before the character breaks into a run",
+      "detector_rule": "dashdance.v1",
+      "critical_properties": [
+        {"key": "repeated_direction_reversals", "values": ["two_or_more", "one", "none"], "visibility": "visible", "label_decisive": true, "telemetry": "Dash (20) entries with alternating direction"},
+        {"key": "within_initial_dash", "values": ["yes", "no"], "visibility": "visible_native_rate_only", "label_decisive": true, "telemetry": "No Run (21) between reversals; gaps of 20 frames or fewer"},
+        {"key": "grounded_throughout", "values": ["yes", "no"], "visibility": "visible", "label_decisive": false, "telemetry": "airborne false"}
+      ],
+      "near_miss_kinds": {"foxtrot_same_direction": "Repeated dashes in one direction (the source names foxtrotting separately).", "single_dashback": "One reversal only; community usage is ambiguous, so review it."},
+      "wrong_context_sources": ["Generic 2D platformer running turns", "Ultimate dash-dance footage (different engine, same name)"],
+      "visual_only_expectation": "Decidable if dash and run animations are distinguishable at the selected rate."
+    },
+    "short hop": {
+      "game": "Super Smash Bros. Melee",
+      "sense_id": "sense:7781b47b0f76584fd9039e3e:050",
+      "plain_description": "a low jump from the ground made by releasing the jump button before the character leaves the ground",
+      "detector_rule": "short_hop.v1",
+      "critical_properties": [
+        {"key": "grounded_jump", "values": ["yes", "no"], "visibility": "visible", "label_decisive": true, "telemetry": "KneeBend (24) to JumpF/JumpB (25/26)"},
+        {"key": "jump_height_class", "values": ["short", "full"], "visibility": "visible", "label_decisive": true, "telemetry": "apex height compared with the same character's other jumps in the replay", "note": "Character-dependent; reviewers need a same-character reference."},
+        {"key": "jump_released_before_takeoff", "values": ["yes", "no"], "visibility": "telemetry_only", "label_decisive": false, "telemetry": "X/Y or tap-jump stick on the last jumpsquat frame"}
+      ],
+      "near_miss_kinds": {"full_hop": "Jump input held through jumpsquat."},
+      "wrong_context_sources": ["Short hops in other Smash titles or platform fighters"],
+      "visual_only_expectation": "Decidable by height with a character reference; the input mechanism stays telemetry_only."
+    },
+    "edgehogging": {
+      "game": "Super Smash Bros. Melee",
+      "sense_id": "sense:67366c297ff6c80f52c91c64:050",
+      "plain_description": "holding onto the stage edge so a recovering opponent cannot grab it",
+      "detector_rule": "edgehog.v1",
+      "critical_properties": [
+        {"key": "holder_on_ledge", "values": ["yes", "no"], "visibility": "visible", "label_decisive": true, "telemetry": "CliffCatch/CliffWait (252/253)"},
+        {"key": "opponent_recovering_below_or_beyond_ledge", "values": ["yes", "no"], "visibility": "context_dependent", "label_decisive": true, "telemetry": "opponent airborne on the same side beyond or below the holder", "note": "The camera usually frames both players; far-offstage recoveries can leave the frame."},
+        {"key": "opponent_denied_ledge", "values": ["yes", "no"], "visibility": "visible", "label_decisive": true, "telemetry": "opponent does not catch the ledge during the overlap"},
+        {"key": "outcome", "values": ["stock_lost", "recovered"], "visibility": "visible", "label_decisive": false, "telemetry": "stock decrease or dead state; otherwise ledge or stage return"},
+        {"key": "deliberate_denial", "values": ["yes", "no"], "visibility": "not_observable", "label_decisive": false, "telemetry": "none", "note": "Intent is not scored."}
+      ],
+      "near_miss_kinds": {"ledge_held_opponent_recovered": "Ledge held while the opponent is offstage, but the opponent recovers."},
+      "wrong_context_sources": ["Edge-guarding by attacks without ledge occupancy (separate term)", "Brawl/Ultimate ledge-trumping"],
+      "visual_only_expectation": "Mostly visible; context_dependent when the opponent is off-camera."
+    },
+    "FC": {"game": "Age of Empires II: Definitive Edition", "sense_id": "sense:d2a95bea664d567e3a210464:002", "plain_description": "a build that advances through the second age quickly to reach the third age as early as possible", "detector_rule": null,
+      "critical_properties": [
+        {"key": "early_third_age_click", "values": ["yes", "no"], "visibility": "context_dependent", "label_decisive": true, "telemetry": "replay age-up timestamps (not integrated)", "note": "Needs the HUD age indicator and game clock in frame."},
+        {"key": "minimal_second_age_investment", "values": ["yes", "no"], "visibility": "context_dependent", "label_decisive": true, "telemetry": "replay build/research log (not integrated)"}
+      ],
+      "near_miss_kinds": {"standard_feudal_play": "Normal second-age play before a later age-up."}, "wrong_context_sources": ["Tekken 'FC' (Full Crouch), a different sense"], "visual_only_expectation": "Short clips rarely establish it; a long-horizon strategic term."},
+    "Trush": {"game": "Age of Empires II: Definitive Edition", "sense_id": "sense:e6f7e2a318ac4e8ff35d397a:002", "plain_description": "building defensive towers near the opponent's resources early in the game to deny them", "detector_rule": null,
+      "critical_properties": [
+        {"key": "towers_near_opponent_resources", "values": ["yes", "no"], "visibility": "context_dependent", "label_decisive": true, "telemetry": "replay build commands (not integrated)"},
+        {"key": "second_age_timing", "values": ["yes", "no"], "visibility": "context_dependent", "label_decisive": true, "telemetry": "replay age state (not integrated)"}
+      ],
+      "near_miss_kinds": {"defensive_tower_at_home": "A tower in the builder's own base."}, "wrong_context_sources": ["Tower rushes in other RTS titles"], "visual_only_expectation": "Visible only when the recording's camera is on the forward towers."},
+    "deer pushing": {"game": "Age of Empires II: Definitive Edition", "sense_id": "sense:f2105d26e604095e61ace40f:002", "plain_description": "using the scout to herd deer toward the town center so villagers can hunt them nearby", "detector_rule": null,
+      "critical_properties": [
+        {"key": "scout_moves_deer_toward_town_center", "values": ["yes", "no"], "visibility": "context_dependent", "label_decisive": true, "telemetry": "unit positions (not integrated)"}
+      ],
+      "near_miss_kinds": {"scout_exploring_near_deer": "The scout passes deer without herding them."}, "wrong_context_sources": ["Sheep scouting (a related but distinct practice)"], "visual_only_expectation": "Visible when the camera follows the scout."},
+    "drush": {"game": "Age of Empires II: Definitive Edition", "sense_id": "sense:683a1df75e0bc67ebe2f1b6e:002", "plain_description": "an early attack with a small group of first-age militia", "detector_rule": null,
+      "critical_properties": [
+        {"key": "first_age_militia_attack", "values": ["yes", "no"], "visibility": "context_dependent", "label_decisive": true, "telemetry": "replay unit/age state (not integrated)"}
+      ],
+      "near_miss_kinds": {"militia_defending": "Militia used defensively at home."}, "wrong_context_sources": ["Second-age men-at-arms rush"], "visual_only_expectation": "Visible when the HUD shows the first age and the camera shows the attack."},
+    "3 TC booming": {"game": "Age of Empires II: Definitive Edition", "sense_id": "sense:df48f0a5fb7a345e681b0756:002", "plain_description": "building two extra town centers early in the third age to grow the economy", "detector_rule": null,
+      "critical_properties": [
+        {"key": "two_additional_town_centers_early_third_age", "values": ["yes", "no"], "visibility": "context_dependent", "label_decisive": true, "telemetry": "replay build commands (not integrated)"}
+      ],
+      "near_miss_kinds": {"single_extra_town_center": "One extra town center only."}, "wrong_context_sources": ["Booming in other RTS titles"], "visual_only_expectation": "Long horizon; frames rarely show all three town centers."}
+  }
+}

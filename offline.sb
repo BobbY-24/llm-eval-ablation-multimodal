@@ -1,0 +1,12 @@
+(version 1)
+(deny default)
+; Metadata-only traversal permits arbitrary extraction locations.
+(allow file-read-metadata)
+(allow file-read* file-test-existence (literal "/"))
+(allow process-exec (literal (param "PYTHON")) (literal (param "PYTHON_APP")))
+(allow sysctl-read process-info* mach-lookup)
+(allow file-read* (subpath "/System") (subpath "/usr") (subpath "/Library/Apple") (subpath "/private/var/db/dyld") (literal "/dev/null") (literal "/dev/urandom") (literal "/private/etc/localtime"))
+(allow file-read* (subpath (param "RUNTIME")) (subpath (param "SSL")) (subpath (param "DECIMAL")))
+(allow file-map-executable (subpath "/System") (subpath "/usr") (subpath (param "RUNTIME")) (subpath (param "SSL")) (subpath (param "DECIMAL")))
+(allow file-read* (subpath (param "PACKAGE")))
+(allow file-write* (subpath (param "WRITABLE")) (literal "/dev/null"))

@@ -1,0 +1,59 @@
+{
+  "evidence_type": "local_fixture_conformance_not_real_dataset_validation",
+  "completed_utc": "2026-10-10T23:52:14.736833+00:00",
+  "python": "3.14.6",
+  "optional_dependencies": {
+    "numpy": null,
+    "Pillow": null,
+    "av": null,
+    "h5py": null,
+    "peppi-py": null,
+    "PyYAML": null
+  },
+  "selection": [
+    "test_adapters",
+    "test_melee_mining",
+    "test_stage2"
+  ],
+  "tests_run": 60,
+  "passed": 52,
+  "errors": [],
+  "failures": [],
+  "skipped": [
+    {
+      "test": "test_csgo_gap_selection_uses_native_ids (test_adapters.AdapterTests.test_csgo_gap_selection_uses_native_ids)",
+      "reason": "NumPy/h5py optional dependencies absent"
+    },
+    {
+      "test": "test_csgo_native_bgr_to_rgb_and_numeric_frame_order (test_adapters.AdapterTests.test_csgo_native_bgr_to_rgb_and_numeric_frame_order)",
+      "reason": "NumPy/h5py optional dependencies absent"
+    },
+    {
+      "test": "test_csgo_rejects_external_hdf5_links (test_adapters.AdapterTests.test_csgo_rejects_external_hdf5_links)",
+      "reason": "NumPy/h5py optional dependencies absent"
+    },
+    {
+      "test": "test_dota_image_has_no_invented_timestamp (test_adapters.AdapterTests.test_dota_image_has_no_invented_timestamp)",
+      "reason": "NumPy/Pillow optional dependencies absent"
+    },
+    {
+      "test": "test_minerl_object_arrays_never_unpickle (test_adapters.AdapterTests.test_minerl_object_arrays_never_unpickle)",
+      "reason": "NumPy optional reader dependency absent"
+    },
+    {
+      "test": "test_minerl_terminal_observation_and_padding (test_adapters.AdapterTests.test_minerl_terminal_observation_and_padding)",
+      "reason": "NumPy optional reader dependency absent"
+    },
+    {
+      "test": "test_starcraft_exact_band_and_storage_channel_mapping (test_adapters.AdapterTests.test_starcraft_exact_band_and_storage_channel_mapping)",
+      "reason": "NumPy optional reader dependency absent"
+    },
+    {
+      "test": "test_starcraft_memory_limit_covers_all_decoded_bands (test_adapters.AdapterTests.test_starcraft_memory_limit_covers_all_decoded_bands)",
+      "reason": "NumPy optional reader dependency absent"
+    }
+  ],
+  "successful": true,
+  "real_dataset_samples_validated": 0,
+  "isolation": "macOS sandbox-exec wrapper; empty environment; network denied; bounded CPU/file output"
+}

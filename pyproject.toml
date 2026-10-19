@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multimodal-game-eval"
+version = "0.1.0"
+description = "Offline, provenance-preserving evaluation of community gaming terms"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+video = ["av", "numpy"]
+arrays = ["numpy"]
+images = ["Pillow", "numpy"]
+hdf5 = ["h5py", "numpy"]
+slippi = ["peppi-py==0.8.6"]
+yaml = ["PyYAML"]
+
+[project.scripts]
+multimodal-game-eval = "multimodal_game_eval.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

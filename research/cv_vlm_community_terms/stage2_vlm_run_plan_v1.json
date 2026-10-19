@@ -1,0 +1,244 @@
+{
+  "plan_id": "stage2-vlm-grounding-v1",
+  "created": "2026-10-10",
+  "status": "frozen_design_pending_stage1_episode_registry",
+  "authorization": {
+    "budget_usd": 0,
+    "live_calls_authorized": false,
+    "downloads_authorized": false,
+    "decisions_2026_10_10": {
+      "data_path": "Melee / Slippi telemetry, replays supplied locally by the user",
+      "annotation": "provisional single annotator (user); ineligible for paired lexical claims until a second independent annotator and a third adjudicator are added",
+      "vlm_families": "closed API models",
+      "budget": "$0; plan only"
+    }
+  },
+  "question": "Can VLMs ground gaming-community jargon in visual gameplay evidence, and does jargon wording help or hurt against meaning-matched plain wording?",
+  "frozen_files_sha256": {
+    "configs/stage2_vlm.json": "5ceb2fe745ea974250e3bff9fe596d1010b4117acbb0815bb3045eae4b96f9b4",
+    "configs/stage2_prompts.json": "800efe737837fb6c97608e727a5845f76904502c3150fa20247517f210309e7e",
+    "configs/pilot_families.json": "d794e283e326289c398c570a72ba9583807089d3c715733f5911a0024938810b",
+    "configs/pilot.json": "e0539707964ea7bd3b62229c9a4783073c3c8b7f96204c68acbf608b3e45a40d",
+    "src/multimodal_game_eval/vlm_prompts.py": "babb9cf850ea6bf64cb8d11c91c0f486b715170ecbceca2441f9621960e288fa",
+    "src/multimodal_game_eval/sampling.py": "4440969d275eca41caf9b0c5fe950dd3be233490ab9a182c1ab9490adef11b2c",
+    "src/multimodal_game_eval/melee_mining.py": "b13d9d8d23f63b87210e35aafd6d495f432eefff76702413b405d8331d737407",
+    "src/multimodal_game_eval/experiments.py": "26b922eb198b5f0845cc21e021031a4c06e26f03680a5da33995d4ad6e82978a"
+  },
+  "freeze_rule": "Changing any frozen file, the episode registry, or the frame-selection rule creates plan v2. Eval annotations and these templates must be frozen (hash recorded here) before any model output is imported.",
+  "units": {
+    "split_unit": "lineage group (replay, plus session/set when a --sessions map is supplied); never frames",
+    "dev_fraction": 0.25,
+    "near_duplicates": "identical replay SHA-256 deduplicated; all candidates from one replay share replay_id and parent_sample_id so prepare keeps them together",
+    "within_family_generalization_only": true
+  },
+  "cells": {
+    "conditions": [
+      "jargon_text",
+      "jargon_visual",
+      "jargon_both",
+      "plain_text",
+      "plain_visual",
+      "plain_both"
+    ],
+    "pairing": "All six cells on the same underlying example",
+    "seeds": [
+      11,
+      23,
+      37
+    ],
+    "seed_semantics": "Closed APIs here expose no sampling seed (temperature is removed on Claude Opus 5.5 / Sonnet 5.5). The seed fixes the listed label-option order and the request order; three independent calls per cell measure provider nondeterminism plus presentation order."
+  },
+  "frame_selection_rule": {
+    "source": "melee_mining.clip_and_frame_plan + sampling.select_frames",
+    "clip": "candidate event_frames padded per family (wavedash 20/20, L-cancel 12/20, dashdancing 12/12, short hop 8/12, edgehogging 30/30 native frames), end-exclusive, native 60 Hz Slippi clock",
+    "budget": "at most 64 frames",
+    "policy": "preserve all native frames when the clip is 64 frames or fewer; otherwise uniform by ordinal position with every key frame and its predecessor required (defining transitions are never dropped)",
+    "no_pixel_transform": true,
+    "no_temporal_interpolation": true,
+    "index_space": "native Slippi frames; translate to rendered video indices only through a reviewed rendered_manifest.jsonl frame_map",
+    "render_spec_to_record": "Dolphin/Slippi build, 640x480 internal resolution or record actual, no HUD/input-display overlays, audio off, native 60 Hz, alignment checked at start/middle/end"
+  },
+  "prompts": {
+    "templates": "multimodal_game_eval/configs/stage2_prompts.json",
+    "renderer": "multimodal_game_eval/src/multimodal_game_eval/vlm_prompts.py",
+    "gold_withheld": "renderer accepts only the allowlisted keys of inputs.jsonl row.input and refuses any other key; gold, reviews, candidate kind/stratum, rule evidence, inventory definitions and usage quotes never enter a request",
+    "request_A_label": "term or plain description + evidence -> label, event_interval_seconds, confidence",
+    "request_B_property_probe": "separate request, neutral property questions shared by both wording arms (term and plain description omitted), per evidence modality; not_observable properties omitted",
+    "ordering": "system, frames with timestamps, text evidence, worded question last (shared cacheable prefix; wording varies only in the final block)",
+    "output_schema": {
+      "label": "configs/stage2_prompts.json#label_response_schema",
+      "property": "configs/stage2_prompts.json#property_response_schema"
+    },
+    "max_output_tokens": 2048
+  },
+  "gold_and_scoring": {
+    "gold": "condition-specific gold_by_condition wherever a label-decisive property is telemetry_only or context_dependent (L-cancel visual arms expected INSUFFICIENT by design); unequal-information examples are diagnostic and excluded from paired lexical-effect claims",
+    "metrics": [
+      "label accuracy and macro-F1 over PRESENT/ABSENT/INSUFFICIENT",
+      "INSUFFICIENT precision/recall (appropriate abstention)",
+      "critical-property exact agreement from request B",
+      "temporal IoU for observable positives",
+      "coverage and missing/invalid responses"
+    ],
+    "contrasts": "paired jargon minus plain within each evidence modality; visual and both minus text within each wording; per family and pooled",
+    "uncertainty": "1,000 bootstrap resamples over independent lineage groups",
+    "calibration": "optional confidence collected; analysed separately",
+    "merge_rule": "request A label and request B properties are merged per item_id into one response row per replication before score_responses (implementation pending)"
+  },
+  "candidate_vlms": [
+    {
+      "model": "claude-opus-5-5",
+      "price_usd_per_mtok": [
+        4.0,
+        20.0
+      ],
+      "source": "claude-api skill cache 2026-10-06"
+    },
+    {
+      "model": "claude-sonnet-5-5",
+      "price_usd_per_mtok": [
+        2.0,
+        10.0
+      ],
+      "source": "claude-api skill cache 2026-10-06"
+    },
+    {
+      "model": "claude-haiku-5-5",
+      "price_usd_per_mtok": [
+        0.1,
+        0.5
+      ],
+      "source": "claude-api skill cache 2026-10-06"
+    },
+    {
+      "model": "OpenAI vision model (unselected)",
+      "price_usd_per_mtok": null,
+      "source": "not checked"
+    },
+    {
+      "model": "Google Gemini vision model (unselected)",
+      "price_usd_per_mtok": null,
+      "source": "not checked"
+    }
+  ],
+  "cost_estimate": {
+    "status": "configured_scenario_not_provider_quote",
+    "eval_projection_150_episodes": {
+      "requests": 4050,
+      "input_tokens": 76882500,
+      "output_tokens_assumed": 2430000,
+      "output_tokens_cap": 8294400,
+      "usd": {
+        "claude-opus-5-5": {
+          "usd_assumed_output": 356.13,
+          "usd_output_cap": 473.42
+        },
+        "claude-sonnet-5-5": {
+          "usd_assumed_output": 178.06,
+          "usd_output_cap": 236.71
+        },
+        "claude-haiku-5-5": {
+          "usd_assumed_output": 8.9,
+          "usd_output_cap": 11.84
+        },
+        "openai-vision-model-unselected": {
+          "usd_assumed_output": null,
+          "usd_output_cap": null
+        },
+        "google-gemini-vision-model-unselected": {
+          "usd_assumed_output": null,
+          "usd_output_cap": null
+        }
+      }
+    },
+    "dev_projection_50_episodes": {
+      "requests": 1350,
+      "usd": {
+        "claude-opus-5-5": {
+          "usd_assumed_output": 118.71,
+          "usd_output_cap": 157.81
+        },
+        "claude-sonnet-5-5": {
+          "usd_assumed_output": 59.35,
+          "usd_output_cap": 78.9
+        },
+        "claude-haiku-5-5": {
+          "usd_assumed_output": 2.97,
+          "usd_output_cap": 3.95
+        },
+        "openai-vision-model-unselected": {
+          "usd_assumed_output": null,
+          "usd_output_cap": null
+        },
+        "google-gemini-vision-model-unselected": {
+          "usd_assumed_output": null,
+          "usd_output_cap": null
+        }
+      }
+    },
+    "cached_prefix_scenario_eval": {
+      "assumption": "18 visual-bearing requests per example share a ~27,000-token system+frames prefix: 1 cache write at 1.25x plus 17 reads at 0.1x; hits within TTL unverified",
+      "input_token_equivalents": 15930000,
+      "usd_assumed_output": {
+        "claude-opus-5-5": 112.32,
+        "claude-sonnet-5-5": 56.16,
+        "claude-haiku-5-5": 2.81
+      }
+    },
+    "batch_api": "50% discount where applicable; not applied in headline",
+    "unknowns": [
+      "image tokens per 640x480 frame on current models (w*h/750 assumed; verify with count_tokens)",
+      "maximum images per request per provider (64 frames may exceed a limit; a montage fallback would be a pixel transform and needs plan v2)",
+      "actual eval episode count after adjudication",
+      "frames per clip (64 is a ceiling)",
+      "thinking tokens per request",
+      "OpenAI/Gemini model IDs, prices and video/image accounting",
+      "cache hit rate"
+    ]
+  },
+  "reference_points": {
+    "B0_prior": "per-family majority label and always-PRESENT, from dev gold",
+    "B1_vision_only_probe": {
+      "model": "frozen CLIP-class image encoder (e.g. open_clip ViT-B/32), no fine-tuning",
+      "input": "identical selected frames (<=64) as the VLM visual arm",
+      "features": "per-clip mean and max of frame embeddings plus mean absolute consecutive-frame embedding difference",
+      "classifier": "per-family L2 logistic regression, PRESENT vs not-PRESENT; regularization chosen by grouped CV on training groups only",
+      "training_data": [
+        "dev-split reviewed labels (small)",
+        "separate pool of detector-proposed windows from replays disjoint from every Stage 1 lineage group, labelled by telemetry rules (label source: telemetry_rule, never human gold)"
+      ],
+      "evaluation": "eval split, visual-arm gold; cannot abstain, so report on PRESENT/ABSENT items plus coverage",
+      "requires_approval": "downloads of torch/open_clip and encoder weights (several hundred MB); local CPU/MPS compute on the M3"
+    },
+    "B2_telemetry_rule_reference": {
+      "model": "melee_mining rules (ruleset melee-mining-v1) on the same eval windows",
+      "mapping": "positive_candidate -> PRESENT, near_miss_candidate -> ABSENT, no proposal -> ABSENT",
+      "scored_against": "event_reference_label: a protected label reviewed with full video plus telemetry access (annotation extension needed before freeze)",
+      "interpretation": "information reference (privileged state), not a visual upper bound",
+      "circularity_control": "annotators see clips and raw telemetry but never the rule's kind, stratum or evidence; report rule-human agreement separately"
+    }
+  },
+  "machinery_checks_2026_10_10": {
+    "evidence_type": "synthetic_or_projection_not_results",
+    "synthetic_demo_episodes": {
+      "selected_eval_episodes": 9,
+      "grounding_requests": 162,
+      "property_probes": 81,
+      "communities": 0
+    },
+    "projection_registry": "multimodal_game_eval/artifacts/stage2-plan-v1/projection_episodes.jsonl (150 eval + 50 dev placeholders, not episodes)",
+    "plan_files": [
+      "multimodal_game_eval/artifacts/stage2-plan-v1/synthetic_demo_plan.json",
+      "multimodal_game_eval/artifacts/stage2-plan-v1/projection_eval_plan.json",
+      "multimodal_game_eval/artifacts/stage2-plan-v1/projection_dev_plan.json"
+    ]
+  },
+  "item_level_plan_command": "zsh multimodal_game_eval/run_offline.sh plan --episodes <ABSOLUTE frozen Stage 1 episodes.jsonl> --config <ABSOLUTE multimodal_game_eval/configs/stage2_vlm.json> --output <ABSOLUTE artifacts path>",
+  "limitations": [
+    "No model, human gold or real media result exists; every number above is a projection or synthetic check.",
+    "Melee action-state constants and peppi field names are unverified on real replays.",
+    "Provisional single-annotator labels cannot support paired lexical-effect claims.",
+    "Inventory senses rest on one SSBWiki page for all Melee families; meanings are unadjudicated.",
+    "Text-arm observations must be written by reviewers from visible events without privileged telemetry; this is manual."
+  ]
+}
