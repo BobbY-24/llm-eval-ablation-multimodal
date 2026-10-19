@@ -1,0 +1,1060 @@
+{
+  "bootstrap_iterations": 1000,
+  "by_condition": {
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"jargon_both\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"jargon_text\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"jargon_visual\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"plain_both\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"plain_text\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"plain_visual\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"jargon_both\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"jargon_text\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"jargon_visual\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"plain_both\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"plain_text\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"plain_visual\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 6,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 6
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    }
+  },
+  "by_game_version": {
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 36,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 36
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 36,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 36
+      },
+      "source_families": 6,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    }
+  },
+  "by_sense": {
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"fixture:sense:0:0\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 12,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 12
+      },
+      "source_families": 2,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"fixture:sense:0:1\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 12,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 12
+      },
+      "source_families": 2,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 1\",\"synthetic-v1\",\"fixture:sense:0:2\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 12,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 12
+      },
+      "source_families": 2,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"fixture:sense:1:0\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 12,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 12
+      },
+      "source_families": 2,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"fixture:sense:1:1\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 12,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 12
+      },
+      "source_families": 2,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    },
+    "[\"Synthetic fixture world 2\",\"synthetic-v1\",\"fixture:sense:1:2\"]": {
+      "action_items": 0,
+      "critical_property_exact_precision": null,
+      "critical_property_exact_recall": null,
+      "critical_property_predicted_n": 0,
+      "critical_property_required_n": 0,
+      "interpretation_accuracy": 1.0,
+      "interpretation_family_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "items": 12,
+      "property_set_exact_accuracy": null,
+      "response_statuses": {
+        "valid": 12
+      },
+      "source_families": 2,
+      "temporal_iou_ge_05": null,
+      "temporal_items": 0,
+      "temporal_mean_iou": null,
+      "uncertainty_warning": null,
+      "valid_action_accuracy": null
+    }
+  },
+  "details_path": "artifacts/demo-final/scores_correct/score_details.jsonl",
+  "evidence_type": "imported_responses_not_execution",
+  "expected_items": 72,
+  "findings": [],
+  "gold_manifest_validation": "gold_hash_verified",
+  "gold_sha256": "1002b7f23c0030be84a2f5d0a38e569ca9032f19cc00b26b7c30242c65f3393f",
+  "limitations": [
+    "Property metrics measure exact canonical schema agreement, not semantic paraphrase quality.",
+    "Temporal/action denominators contain only reviewed targets; missing outputs count as misses.",
+    "Source-family bootstrap does not make a small or convenience corpus representative.",
+    "This scorer does not establish gameplay optimality, language emergence, or causal diffusion."
+  ],
+  "paired_condition_differences": {
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"jargon_both\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "jargon_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"jargon_both\",\"minus\",\"jargon_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_visual",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "jargon_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"jargon_visual\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "jargon_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"jargon_both\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_both",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "controlled_terminology_contrast",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"jargon_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_visual",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"plain_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "plain_text",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"plain_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "plain_visual",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_text\",\"minus\",\"jargon_both\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_both",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_text",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_text\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "controlled_terminology_contrast",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_text",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_text\",\"minus\",\"jargon_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_visual",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_text",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_visual\",\"minus\",\"jargon_both\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_both",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_visual\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_visual\",\"minus\",\"jargon_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_visual",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "controlled_terminology_contrast",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 1\\\",\\\"synthetic-v1\\\"]\",\"plain_visual\",\"minus\",\"plain_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "plain_text",
+      "game_version": [
+        "Synthetic fixture world 1",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"jargon_both\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "jargon_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"jargon_both\",\"minus\",\"jargon_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_visual",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "jargon_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"jargon_visual\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "jargon_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"jargon_both\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_both",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "controlled_terminology_contrast",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"jargon_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_visual",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"plain_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "plain_text",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_both\",\"minus\",\"plain_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "plain_visual",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_both",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_text\",\"minus\",\"jargon_both\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_both",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_text",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_text\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "controlled_terminology_contrast",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_text",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_text\",\"minus\",\"jargon_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_visual",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_text",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_visual\",\"minus\",\"jargon_both\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_both",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_visual\",\"minus\",\"jargon_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_text",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_visual\",\"minus\",\"jargon_visual\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "jargon_visual",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "controlled_terminology_contrast",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_visual",
+      "source_families": 6
+    },
+    "[\"[\\\"Synthetic fixture world 2\\\",\\\"synthetic-v1\\\"]\",\"plain_visual\",\"minus\",\"plain_text\"]": {
+      "both_responses_valid": 6,
+      "denominator_policy": "all_gold_pairs_missing_and_invalid_count_as_wrong",
+      "family_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "first": "plain_text",
+      "game_version": [
+        "Synthetic fixture world 2",
+        "synthetic-v1"
+      ],
+      "information_match_verified": true,
+      "interpretation": "diagnostic_not_pure_lexical_effect",
+      "interpretation_accuracy_difference": 0.0,
+      "planned_pair_items": 6,
+      "second": "plain_visual",
+      "source_families": 6
+    }
+  },
+  "response_statuses": {
+    "valid": 72
+  },
+  "responses_sha256": "0796b237377393ac79ddf215a2db50041e727edb60e0ccbb17ba86f07cf9d2ba",
+  "schema_version": "multimodal-game-eval-v1",
+  "scores_path": "artifacts/demo-final/scores_correct/scores.json",
+  "valid_response_coverage": 1.0
+}

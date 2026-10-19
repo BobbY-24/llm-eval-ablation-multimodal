@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.DS_Store
+
+# Keep acquired media, private paths, annotations and run outputs local.
+# Bundled inventory data and the saved synthetic demo/plan artifacts are tracked.
+data/*
+!data/research/
+!data/outputs/
+runs/
+artifacts/*
+!artifacts/demo-final/
+!artifacts/stage2-plan-v1/
+!artifacts/verification-*.json
+configs/datasets.local.json
+*.slp
+*.aoe2record
+*.mgz
+*.mgx
+*.mgl
+*.mp4
+*.mkv
+*.avi
+*.h5
+*.hdf5

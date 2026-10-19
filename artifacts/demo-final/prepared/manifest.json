@@ -1,0 +1,59 @@
+{
+  "annotation_count": 12,
+  "annotation_sha256": "16d9b8d9b7e8aa8cd5c2625384ea0a4a770b9c8db8000e5470e097c6e6157d83",
+  "conditions": [
+    "jargon_text",
+    "jargon_visual",
+    "jargon_both",
+    "plain_text",
+    "plain_visual",
+    "plain_both"
+  ],
+  "dev_fraction": 0.25,
+  "eligible_episodes": 12,
+  "episode_splits": {
+    "dev": 3,
+    "eval": 9
+  },
+  "family_count": 12,
+  "filenames": {
+    "episodes": "episodes.jsonl",
+    "gold": "gold.jsonl",
+    "inputs": "inputs.jsonl",
+    "manifest": "manifest.json",
+    "unscored": "unscored.jsonl"
+  },
+  "files": {
+    "episodes": {
+      "path": "artifacts/demo-final/prepared/episodes.jsonl",
+      "sha256": "cdbea092619c825b50273b7b0ee13691b84394724ba6c493fae360517980d93a"
+    },
+    "gold": {
+      "path": "artifacts/demo-final/prepared/gold.jsonl",
+      "sha256": "1002b7f23c0030be84a2f5d0a38e569ca9032f19cc00b26b7c30242c65f3393f"
+    },
+    "inputs": {
+      "path": "artifacts/demo-final/prepared/inputs.jsonl",
+      "sha256": "833230eab22a3fb458f5e60f8dd7283e1189c47c40c199e825afc8fd59034ec1"
+    },
+    "unscored": {
+      "path": "artifacts/demo-final/prepared/unscored.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "input_count": 72,
+  "inventory_sha256": "6f38c6577e8afb4c6e608f8bcc9ebeb0d9059acd480442094e07169008ed7732",
+  "inventory_validation": "performed",
+  "limitations": [
+    "Known senses may recur; this is not unseen-sense generalization.",
+    "Assets and nonanswer public descriptions require human leakage review.",
+    "No simulator, renderer, agent interaction, or model performance is produced."
+  ],
+  "mode": "offline_preparation",
+  "projection_contract": "model receives inputs.jsonl row.input only",
+  "schema_version": "multimodal-game-eval-v1",
+  "seed": 42,
+  "unscored_count": 0,
+  "unscored_reasons": {},
+  "warnings": []
+}

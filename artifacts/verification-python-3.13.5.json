@@ -1,0 +1,37 @@
+{
+  "evidence_type": "local_fixture_conformance_not_real_dataset_validation",
+  "completed_utc": "2026-10-19T23:15:03.013336+00:00",
+  "python": "3.13.5",
+  "optional_dependencies": {
+    "numpy": "2.3.1",
+    "Pillow": "11.1.0",
+    "av": null,
+    "h5py": null,
+    "peppi-py": null,
+    "PyYAML": "6.0.2"
+  },
+  "selection": [
+    "all"
+  ],
+  "tests_run": 121,
+  "passed": 118,
+  "errors": [],
+  "failures": [],
+  "skipped": [
+    {
+      "test": "test_csgo_gap_selection_uses_native_ids (test_adapters.AdapterTests.test_csgo_gap_selection_uses_native_ids)",
+      "reason": "NumPy/h5py optional dependencies absent"
+    },
+    {
+      "test": "test_csgo_native_bgr_to_rgb_and_numeric_frame_order (test_adapters.AdapterTests.test_csgo_native_bgr_to_rgb_and_numeric_frame_order)",
+      "reason": "NumPy/h5py optional dependencies absent"
+    },
+    {
+      "test": "test_csgo_rejects_external_hdf5_links (test_adapters.AdapterTests.test_csgo_rejects_external_hdf5_links)",
+      "reason": "NumPy/h5py optional dependencies absent"
+    }
+  ],
+  "successful": true,
+  "real_dataset_samples_validated": 0,
+  "isolation": "macOS sandbox-exec wrapper; empty environment; network denied; bounded CPU/file output"
+}
