@@ -1,6 +1,6 @@
 # LLM evaluation: API ablation study and multimodal game-term loaders
 
-[![tests](https://github.com/BobbY-24/multimodal-game-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/BobbY-24/multimodal-game-eval/actions/workflows/tests.yml) ![python](https://img.shields.io/badge/python-3.11%2B-blue) ![license](https://img.shields.io/badge/license-MIT-green)
+[![tests](https://github.com/BobbY-24/llm-eval-ablation-multimodal/actions/workflows/tests.yml/badge.svg)](https://github.com/BobbY-24/llm-eval-ablation-multimodal/actions/workflows/tests.yml) ![python](https://img.shields.io/badge/python-3.11%2B-blue) ![license](https://img.shields.io/badge/license-MIT-green)
 
 Python 3.11 or later. Neither part needs third-party packages for its core commands.
 
