@@ -1,6 +1,6 @@
 {
   "annotation_count": 12,
-  "annotation_sha256": "16d9b8d9b7e8aa8cd5c2625384ea0a4a770b9c8db8000e5470e097c6e6157d83",
+  "annotation_sha256": "42967d8634e6c9cd16452636a71d4cdb96b41059265cc188703270e78371a8dd",
   "conditions": [
     "jargon_text",
     "jargon_visual",
@@ -34,7 +34,7 @@
     },
     "inputs": {
       "path": "artifacts/demo-final/prepared/inputs.jsonl",
-      "sha256": "833230eab22a3fb458f5e60f8dd7283e1189c47c40c199e825afc8fd59034ec1"
+      "sha256": "b8da1675a24c93abf2928c71ca9e32453ed8d7691fcfcfd294ad76a0cace36a0"
     },
     "unscored": {
       "path": "artifacts/demo-final/prepared/unscored.jsonl",

@@ -21,7 +21,7 @@ The canonical inventory has 903 scope-specific candidate senses, each with an ex
 | Read-only source | SHA-256 |
 |---|---|
 | `research/GAME_TERM_INVENTORY_2026-10-06.json` | `a9df5e368d774de2d357d04724efbe47c4f57e23a441e19c26e3d6c09d4ef0c6` |
-| `outputs/01a10cf7-a4dc-7cd2-b0d9-e2e69a76155a/game_context_space.json` | `88a54b303b467f4d5dc630bd658aa969dd77f21f10e06664ec16bed8faaf7c30` |
+| `outputs/01a10cf7-a4dc-7cd2-b0d9-e2e69a76155a/game_context_space.json` | `ef9284a6102222666ca4b120bfb4bb4d5bef3d064e2df4ec353aeff3fc71a426` |
 
 2026-10-10 additions are fixture-checked only: `melee_mining.py` rules (synthetic frame sequences), chunked mining equivalence, `mine-candidates` → `export-annotations` → `prepare` (zero eligible episodes, as intended for unreviewed candidates), grounding-only `plan`, and gold-free prompt rendering of the synthetic demo inputs. The `--data-root` read grant was checked with canaries: the named directory was readable, while a sibling directory and the no-flag case were denied. No real replay was parsed.
 
