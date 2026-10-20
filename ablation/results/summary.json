@@ -1,0 +1,86 @@
+{
+  "evidence_type": "historical_api_campaign_aggregates",
+  "generated_utc": "2026-10-20T01:06:07+00:00",
+  "task": "Collect community terms from 50 frozen web sources (25 Gaming, 25 Cybersecurity): LLM extraction of candidate occurrences, local literal-grounding checks, LLM judgment.",
+  "cohort": {
+    "sources": 50,
+    "frozen_characters": 921230,
+    "root_chunks": 352,
+    "chunk_chars": 3000,
+    "chunk_overlap": 250,
+    "max_candidates_per_chunk": 64,
+    "judgment_batch_size": 16,
+    "same_bytes_across_pipelines": true
+  },
+  "providers": {
+    "fireworks": [
+      "DeepSeek V4.1 Flash",
+      "GLM 5.3 Flash",
+      "Nemotron 3.5 Lightning 30B A3B"
+    ],
+    "alibaba_model_studio_singapore": [
+      "Qwen 3.7 Flash"
+    ]
+  },
+  "headline": {
+    "glm_vs_deepseek_extraction_cost_change": -0.2802,
+    "glm_vs_deepseek_raw_proposal_change": 0.1812,
+    "glm_vs_deepseek_judge_eligible_change": 0.3811,
+    "glm_vs_deepseek_judgment_cost_change": 0.3715,
+    "glm_vs_deepseek_total_known_cost_change": -0.0127,
+    "normalized_forms_shared_deepseek_only_glm_only": [
+      6098,
+      2555,
+      4331
+    ]
+  },
+  "caveats": [
+    "Costs are provider-reported tokens times the saved list price, not invoices.",
+    "Unknown-outcome holds are conservative reservations for requests whose billing is unresolved, not charges.",
+    "KEEP is a model verdict, not a correctness label. No occurrence-level gold set exists, so no precision or recall is reported.",
+    "More proposals do not imply higher recall; distinct forms include aliases, segmentation differences and errors.",
+    "DeepSeek extraction ran without reasoning, GLM with a 1,024-token reasoning budget: a model-plus-setting comparison.",
+    "The guarded GLM/Nemotron run changed extraction recovery (split depth 2) and judging policy; it is not a judge-only ablation.",
+    "Nemotron and Qwen judge replays halted early; their costs are not completed-pipeline costs."
+  ],
+  "excluded": "Page snapshots, quotes, candidate terms, proposals, URLs and source identifiers (third-party content).",
+  "inputs_sha256": {
+    "all-model-comparison-2026-10-03/evidence/cost-latency.json": "d5404964606522b302d28ecbc9c977f4debfb680156a4a3fb71bb022629e214a",
+    "glm-glm-50-comparison-2026-10-02/reporting/comparison.json": "2fc6f79afdbd8711a1d4e10c47914040ee30a35973981eda2c477618c9737625",
+    "deepseek-glm-50-comparison-2026-10-01/reporting/summary.json": "59ea2a870677a17024f34b6ab6db82cd80455d170a1da392938800cfb93e205f",
+    "glm-nemotron-50-comparison-2026-10-02/run/summary.json": "219df9e5e6b08a5f82f19e772897e2ccd7e29539c4ab75eef6e93840d215d3e7",
+    "glm-qwen-judge50-2026-10-02/run/summary.json": "b50b9ea06768f7e421d16ced2539731e5058a0be6278269a7e76adcebf9cc4d8"
+  },
+  "transcribed_from_reports": {
+    "deepseek_glm": {
+      "distinct_normalized_raw_forms": 6578,
+      "local_grounding_rejects": 212,
+      "gaming_raw": 9100,
+      "cyber_raw": 4205,
+      "gaming_retained": 7186,
+      "cyber_retained": 3903
+    },
+    "glm_glm": {
+      "distinct_normalized_raw_forms": 8230,
+      "local_grounding_rejects": 647,
+      "gaming_raw": 9329,
+      "cyber_raw": 6387,
+      "gaming_retained": 7282,
+      "cyber_retained": 5481
+    },
+    "shared_forms": 6098,
+    "deepseek_only_forms": 2555,
+    "glm_only_forms": 4331,
+    "qwen_smoke_active_proposals": 508
+  },
+  "files": [
+    "judgment_replays.csv",
+    "latency_guarded50.csv",
+    "matched50_by_community.csv",
+    "matched50_pipelines.csv",
+    "figures/cost_by_stage.svg",
+    "figures/candidate_pool.svg",
+    "figures/judgment_coverage.svg"
+  ],
+  "network_calls": 0
+}

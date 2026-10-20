@@ -10,5 +10,7 @@ Offline toolkit for grounding community gaming terms in game media: dataset adap
 - The bundled inventory under `data/` is model-generated candidate data, not adjudicated gold. Do not edit it in place.
 - `research/cv_vlm_community_terms/stage2_vlm_run_plan_v1.json` freezes file hashes of the Stage 2 configs and modules it lists. Editing any of those files means writing plan v2, not changing v1.
 - Acquired media, annotations and run outputs stay untracked (`data/*`, `runs/`, `artifacts/*` except the saved demo/plan/verification records).
+- Part A (`ablation/`): `python3 -m ablation {plan,run,score}`; default provider is an offline mock. `--live` runs (OpenAI-compatible, Gemini) need explicit user approval each time, a finite `--max-calls`, and keys from environment variables only. Tests must stay offline (`tests/test_ablation_api.py` blocks sockets).
+- `ablation/results/` holds only aggregate tables/figures derived from the 2026-10-01..03 50-source runs under `~/Documents/ChatGPT/agentic terms/outputs/` (regenerate with `ablation/results/build_results.py --outputs-root DIR`). Never add page snapshots, quotes, candidate terms, proposals, URLs or source IDs.
 - No live provider calls, downloads, paid compute or publication without explicit user approval.
 - Scratch work goes under `work/<task>/` (untracked).
