@@ -162,25 +162,10 @@ Install only the extras needed in an intentionally prepared environment. No comm
 
 For example, a manually reviewed install of `.[video,arrays]` enables video readers; `.[images,arrays,yaml]` enables Dota2-Vis images and class names. A missing reader produces a finding instead of a network fallback. Python installation and dependency management are outside the offline commands.
 
-## Pilot and limits
-
-The default pilot targets ten candidate families: Melee wavedash, L-cancel, dashdancing, short hop and edgehogging; AoE II DE FC, Trush, deer pushing, drush and 3 TC booming. It requests 20 expert-reviewed examples per family: ten positives, five near-misses and five wrong-context examples. The split targets 25% of lineage groups for development and 75% for evaluation; example proportions depend on group sizes. This is not a held-out-sense test.
-
-Grounding crosses jargon/plain wording with text/visual/both input. Community experiments then test communication and newcomer transfer. No base model, paid provider, live game controller, replay renderer, model fine-tuning or audio decoder is included. Observed player actions are evidence about what happened, not labels for optimal action. See [experiment protocol](docs/PROTOCOL.md) for gates and causal controls.
-
-Readers retain native clocks, provenance and transformation metadata. Windows are end-exclusive. Indexing is not full media validation; decoding a few windows is not validation of the entire corpus. Limits can leave an index truncated or an inventory partial. Unsafe paths, unsafe archive entries and pickle-dependent object arrays are rejected; do not bypass those findings to load unknown files.
-
-- [Acquisition, formats, rights and rendering](docs/DATASETS.md)
-- [Annotation and evidence guide](docs/ANNOTATION.md)
-- [Staged experiment protocol](docs/PROTOCOL.md)
-- [Python reader API and time ranges](docs/API.md)
-- [Communication costs, exposure, reuse and reviewed probes](docs/COMMUNICATION.md)
-- [Verification results and remaining real-data checks](docs/VERIFICATION.md)
-
 ## Verified locally
 
-On 2026-10-10 the 121-test suite passed 110 / 11 optional-reader skips under base Python 3.14.6 (the 2026-10-08 93-test results were 90 passed / 3 skips under the bundled NumPy/Pillow runtime). The Melee mining rules are tested on synthetic telemetry only; their action-state constants are unverified on real replays. The final synthetic demo is saved in `artifacts/demo-final/`: 12 fictional episodes, 72 blinded inputs, correct/wrong/insufficient controls, and ten separate source-linked real pilot candidates. See the verification guide for exact native-reader limitations; these are software checks, not real gameplay or LLM results.
+The 121-test suite passed 110 / 11 optional-reader skips under base Python 3.14.6 (the 2026-10-08 93-test results were 90 passed / 3 skips under the bundled NumPy/Pillow runtime). The Melee mining rules are tested on synthetic telemetry only; their action-state constants are unverified on real replays. The final synthetic demo is saved in `artifacts/demo-final/`: 12 fictional episodes, 72 blinded inputs, correct/wrong/insufficient controls, and ten separate source-linked real pilot candidates. See the verification guide for exact native-reader limitations; these are software checks, not real gameplay or LLM results.
 
-On 2026-10-19, after extraction into this standalone repository (bundled inventory, portable launcher), the suite ran 121 tests: 118 passed, 3 h5py skips, under Python 3.13.5 with NumPy 2.3.1, Pillow 11.1.0 and PyYAML 6.0.2, both directly and through `run_offline.sh` (`artifacts/verification-python-3.13.5.json`).
+After extraction into this standalone repository (bundled inventory, portable launcher), the suite ran 121 tests: 118 passed, 3 h5py skips, under Python 3.13.5 with NumPy 2.3.1, Pillow 11.1.0 and PyYAML 6.0.2, both directly and through `run_offline.sh` (`artifacts/verification-python-3.13.5.json`).
 
 After part A (the API ablation study) was added on 2026-10-19, the suite has 139 tests: 136 passed with 3 h5py skips locally, directly and through `run_offline.sh`. CI on Python 3.11 runs all 139 and passes, skipping 11 tests that need the optional NumPy/Pillow readers.
