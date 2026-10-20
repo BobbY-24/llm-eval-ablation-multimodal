@@ -29,3 +29,6 @@ configs/datasets.local.json
 *.avi
 *.h5
 *.hdf5
+
+# Agent scratch
+work/

@@ -1,0 +1,4 @@
+judge,candidate_pool,scope,eligible_ids,validated_ids,coverage,calls,unknown_outcome_calls,known_judgment_usd,unknown_hold_usd,status
+GLM 5.3 Flash (baseline),"GLM extraction, 15716 proposals",all 50 sources,8984,8984,1.0,722,0,1.1125658,0.0,completed
+Nemotron 3.5 Lightning 30B A3B,"GLM extraction, 15716 proposals",all 50 sources,8984,1546,0.1721,127,9,0.0521554,0.1253376,halted after unknown-outcome threshold
+Qwen 3.7 Flash,"GLM extraction, 15716 proposals",2-source smoke,508,255,0.502,28,1,0.00942136,0.204104,halted: provider rejected request (HTTP 400)

@@ -1,0 +1,4 @@
+stage,returned_n,returned_mean_s,returned_median_s,returned_p95_s,unknown_or_timeout_n,all_attempt_mean_s
+GLM 5.3 Flash extraction,460,24.481,23.268,35.947,0,24.481
+GLM 5.3 Flash judgment,664,11.255,11.276,16.046,2,11.402
+Nemotron 3.5 Lightning judgment,28,27.764,18.942,103.551,12,55.443
