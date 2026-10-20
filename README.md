@@ -1,5 +1,8 @@
 # Multimodal game-term evaluation
 
+[![tests](https://github.com/BobbY-24/multimodal-game-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/BobbY-24/multimodal-game-eval/actions/workflows/tests.yml) ![python](https://img.shields.io/badge/python-3.11%2B-blue) ![license](https://img.shields.io/badge/license-MIT-green)
+
+
 Local tools to join the existing community-term inventory to game media, annotate grounded meanings, prepare evaluation episodes, and score saved responses. Python 3.11 or later is required. The base package has no runtime dependencies, downloads, model calls, or automatic installs.
 
 The existing inventory contains candidate scope memberships and source usages. Its model-generated definitions and scope mappings are not adjudicated semantic gold. This project reads that inventory without changing it. Real media and expert annotations must be supplied separately; the demo creates synthetic fixtures and mock responses only.
