@@ -1,9 +1,80 @@
-# Multimodal game-term evaluation
+# LLM evaluation: API ablation study and multimodal game-term loaders
 
 [![tests](https://github.com/BobbY-24/multimodal-game-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/BobbY-24/multimodal-game-eval/actions/workflows/tests.yml) ![python](https://img.shields.io/badge/python-3.11%2B-blue) ![license](https://img.shields.io/badge/license-MIT-green)
 
+Python 3.11 or later. Neither part needs third-party packages for its core commands.
 
-Local tools to join the existing community-term inventory to game media, annotate grounded meanings, prepare evaluation episodes, and score saved responses. Python 3.11 or later is required. The base package has no runtime dependencies, downloads, model calls, or automatic installs.
+This repository has two parts:
+
+| Part | What it is | Where |
+|---|---|---|
+| **A. API ablation study** | Provider/model comparison from completed API runs, plus a context-ablation runner (A0–A4) for OpenAI-compatible and Gemini APIs | `ablation/`, [research design](docs/research_design.md) |
+| **B. Multimodal dataset loaders** | Nine offline game-media dataset adapters, annotation scaffolding, episode preparation and scoring | `src/multimodal_game_eval/` |
+
+## Part A: API ablation study
+
+### Provider comparison (completed runs)
+
+Five extraction/judgment configurations were run on the same 50 frozen web sources (25 Gaming, 25 Cybersecurity). The tables in `ablation/results/` are derived only from aggregate ledgers. Page text, quotes, candidate terms, URLs and source IDs are excluded.
+
+| Pipeline (extractor → judge) | Sources complete / partial / failed | Raw proposals | Grounding rejects | Known cost (USD) | Unknown hold (USD) |
+|---|---|---:|---:|---:|---:|
+| DeepSeek V4.1 Flash → GLM 5.3 Flash | 46 / 4 / 0 | 13,305 | 1.6% | 1.976 | 1.389 |
+| GLM 5.3 Flash → GLM 5.3 Flash | 46 / 4 / 0 | 15,716 | 4.1% | 1.951 | 0 |
+| GLM 5.3 Flash → Nemotron screen + GLM fallback | 40 / 5 / 5 | 17,349 | — | 1.841 | 0.486 |
+
+- GLM extraction cost 28% less and proposed 18% more candidates than DeepSeek. That sent 38% more occurrences to the judge, so total known cost fell only 1.3%.
+- The extractors were complementary: 2,555 normalized forms appeared only in DeepSeek's output and 4,331 only in GLM's.
+- On the same GLM candidate pool, Nemotron and Qwen judge replays halted early, validating 17% and 50% of eligible IDs. Their low cost is not a completed-pipeline cost (`judgment_replays.csv`).
+
+Known cost means reported tokens times the saved list price; it is not an invoice. An unknown hold is a reservation for a request whose billing was never resolved; it is not a charge. KEEP is a model verdict and no gold set exists, so no precision or recall is claimed.
+
+| File | Contents |
+|---|---|
+| `matched50_pipelines.csv` | Per-pipeline sources, proposals, decisions, calls, tokens, cost |
+| `matched50_by_community.csv` | Gaming / Cybersecurity split |
+| `judgment_replays.csv` | Judge coverage on a fixed candidate pool |
+| `latency_guarded50.csv` | Per-request latency where telemetry exists |
+| `summary.json` | Headline ratios, caveats, SHA-256 pins of the input ledgers |
+| `figures/*.svg` | Cost by stage, candidate pool, judge coverage |
+
+`ablation/results/build_results.py --outputs-root DIR` regenerates the tables from the local run directories, which are not distributed with this repository.
+
+### Context ablation runner (A0–A4)
+
+Each item is asked about under five paired conditions:
+
+| Condition | Evidence given to the model |
+|---|---|
+| A0 | Term only |
+| A1 | Term, community and usage text |
+| A2 | Term, community and image |
+| A3 | Term, community, usage text and image |
+| A4 | Term, community, usage text and a distractor image |
+
+Scoring reports per-condition accuracy and paired contrasts with bootstrap confidence intervals: context gain (A1 − A0), multimodal gain (A3 − A1), text gain (A3 − A2), image-only gain (A2 − A0) and distractor penalty (A1 − A4). The design is ported from the local TermSight prototype.
+
+```sh
+python3 -m ablation plan --items ablation/fixtures/synthetic_items.jsonl --task mcq
+python3 -m ablation run --items ablation/fixtures/synthetic_items.jsonl --max-calls 50 --out runs/ablation-mock
+python3 -m ablation score --items ablation/fixtures/synthetic_items.jsonl --predictions runs/ablation-mock/predictions.jsonl
+```
+
+The default provider is an offline mock, so its scores are meaningless by design. A live run needs `--live`, a hard `--max-calls` and the key in an environment variable:
+
+```sh
+OPENAI_API_KEY=... python3 -m ablation run --provider openai --model MODEL --live --max-calls 40 --items ITEMS.jsonl --out runs/ablation-openai
+GEMINI_API_KEY=... python3 -m ablation run --provider gemini --model MODEL --live --max-calls 40 --items ITEMS.jsonl --out runs/ablation-gemini
+```
+
+- **Other OpenAI-compatible hosts:** `--base-url` targets any OpenAI-compatible host (https, or http on localhost only), and `--api-key-env NAME` reads the key from a different variable.
+- **Key handling:** keys are sent only as request headers, never in URLs, and are never logged.
+- **Failure handling:** each stimulus gets at most one JSON repair, and every attempt is saved. Stimuli left unrun by the budget stay visible as `not_run_budget`.
+- **Status:** no live A0–A4 run has been made. The bundled fixture has four fictional terms with placeholder images. The tests (`tests/test_ablation_api.py`) block sockets and exercise both API adapters through fake transports.
+
+## Part B: multimodal dataset loaders
+
+Local tools to join the existing community-term inventory to game media, annotate grounded meanings, prepare evaluation episodes, and score saved responses. Python 3.11 or later is required. This package has no runtime dependencies, downloads, model calls, or automatic installs.
 
 The existing inventory contains candidate scope memberships and source usages. Its model-generated definitions and scope mappings are not adjudicated semantic gold. This project reads that inventory without changing it. Real media and expert annotations must be supplied separately; the demo creates synthetic fixtures and mock responses only.
 
@@ -11,6 +82,7 @@ The existing inventory contains candidate scope memberships and source usages. I
 
 | Path | Contents |
 |---|---|
+| `ablation/` | Part A: A0–A4 runner, providers, scoring, synthetic fixture, `results/` from completed API runs |
 | `src/multimodal_game_eval/` | Package: dataset adapters (loaders), media readers, inventory join, sampling, episode preparation, VLM prompt rendering, scoring, Melee candidate mining |
 | `src/multimodal_game_eval/adapters/` | Per-dataset loaders: `vpt`, `minerl`, `csgo`, `terraria`, `proact`, `starcraftimage`, `slippi`, `dota2vis`, `aoe2` |
 | `tests/` | Fixture-only unit tests (`python -I -B test_runner.py`) |
@@ -18,7 +90,7 @@ The existing inventory contains candidate scope memberships and source usages. I
 | `data/` | Bundled community-term inventory (`research/`) and its usage graph (`outputs/`); acquired media placed elsewhere under `data/` stays untracked |
 | `artifacts/` | Saved synthetic demo (`demo-final/`), frozen Stage 2 plan projections (`stage2-plan-v1/`) and test verification records; new run outputs stay untracked |
 | `research/cv_vlm_community_terms/` | CV/VLM grounding notes: frozen Stage 2 run plan, session decisions, vision-data sweep for the 1000-term list |
-| `docs/` | Datasets, annotation, protocol, API, communication and verification guides |
+| `docs/` | Part A research design; datasets, annotation, protocol, API, communication and verification guides |
 
 ## Start offline
 
