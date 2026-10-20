@@ -32,3 +32,8 @@ configs/datasets.local.json
 
 # Agent scratch
 work/
+
+# Local agent instructions and notes (kept out of the public tree)
+/AGENTS.md
+/CLAUDE.md
+/memory.md
