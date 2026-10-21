@@ -95,6 +95,12 @@ A0 omits the community on purpose, so it measures the model's prior for the bare
 - **Operational:** calls, reported tokens, cost at the stated price, and latency per condition. Image conditions cost more input tokens.
 - **Diagnostics only:** self-reported `evidence_used` and `confidence`. Calibration is reported only when n is large enough.
 
+### Pilot run (descriptive, $0)
+
+The first live run uses about 40 reviewed items across four communities (the default draft scopes: Super Smash Bros. Melee, Minecraft, Dota 2, Age of Empires II), one free-tier Gemini model and at most 260 calls. Items come from the bundled usage graph. Its community meaning is the gold label, its popular meaning is one distractor, and two other terms from the same scope supply the rest. These are model-generated proposals, so a single reviewer must confirm, correct or drop each row before it becomes an item (`gold_status: provisional_single_reviewer`). The reviewer also tags text explicitness and visual groundability for descriptive breakdowns.
+
+Primary contrasts, fixed before the run: context gain (A1 − A0), multimodal gain (A3 − A1) and distractor penalty (A1 − A4), i.e. RQ2–RQ4. At n ≈ 40 their intervals will be wide. The pilot checks the pipeline and gives a first effect-size estimate; it does not support a power-based or confirmatory claim.
+
 ### Sample size
 
 For paired binary outcomes with about 30% discordant pairs, detecting a 10-point accuracy difference at α = 0.05 (two-sided) with 80% power needs about 235 items per model (McNemar approximation). A 5-point difference needs roughly four times as many. Pilots smaller than this are descriptive.

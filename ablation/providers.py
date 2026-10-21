@@ -35,7 +35,9 @@ class Generation:
 
 
 class ProviderError(RuntimeError):
-    pass
+    def __init__(self, message: str, status: int | None = None):
+        super().__init__(message)
+        self.status = status
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -103,7 +105,7 @@ class _HTTPProvider:
             raise ProviderError("Response exceeded size limit")
         text = body.decode("utf-8", errors="replace")
         if status != 200:
-            raise ProviderError(f"HTTP {status}: {text[:300].replace(key, '[redacted]')}")
+            raise ProviderError(f"HTTP {status}: {text[:300].replace(key, '[redacted]')}", status=status)
         try:
             return json.loads(text)
         except json.JSONDecodeError as exc:

@@ -1,6 +1,6 @@
 {
   "evidence_type": "local_fixture_conformance_not_real_dataset_validation",
-  "completed_utc": "2026-10-20T01:12:38.464423+00:00",
+  "completed_utc": "2026-10-21T00:06:47.596982+00:00",
   "python": "3.13.5",
   "optional_dependencies": {
     "numpy": "2.3.1",
@@ -13,8 +13,8 @@
   "selection": [
     "all"
   ],
-  "tests_run": 139,
-  "passed": 136,
+  "tests_run": 150,
+  "passed": 147,
   "errors": [],
   "failures": [],
   "skipped": [

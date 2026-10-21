@@ -69,8 +69,16 @@ GEMINI_API_KEY=... python3 -m ablation run --provider gemini --model MODEL --liv
 
 - **Other OpenAI-compatible hosts:** `--base-url` targets any OpenAI-compatible host (https, or http on localhost only), and `--api-key-env NAME` reads the key from a different variable.
 - **Key handling:** keys are sent only as request headers, never in URLs, and are never logged.
-- **Failure handling:** each stimulus gets at most one JSON repair, and every attempt is saved. Stimuli left unrun by the budget stay visible as `not_run_budget`.
+- **Failure handling:** each stimulus gets at most one JSON repair, and every attempt is saved. Stimuli left unrun by the budget stay visible as `not_run_budget`. `--transient-retries N` retries HTTP 429/5xx and timeouts (each retry uses `--max-calls`), and `--min-interval S` spaces calls to fit a rate limit.
 - **Status:** no live A0–A4 run has been made. The bundled fixture has four fictional terms with placeholder images. The tests (`tests/test_ablation_api.py`) block sockets and exercise both API adapters through fake transports.
+- **Pilot items:** `draft-items` writes a review CSV of candidate terms from the bundled usage graph, and `build-items` validates the reviewed CSV and writes an items file. Both run offline:
+
+  ```sh
+  python3 -m ablation draft-items --out work/ablation-pilot/review.csv
+  python3 -m ablation build-items --review work/ablation-pilot/review.csv --images IMAGES_DIR --out work/ablation-pilot/items.jsonl
+  ```
+
+  `notebooks/ablation_pilot_colab.ipynb` runs the live smoke test and the pilot from Colab. It has not been run yet.
 
 ## Part B: multimodal dataset loaders
 

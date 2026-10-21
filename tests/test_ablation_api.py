@@ -18,8 +18,9 @@ sys.path.insert(0, str(ROOT))
 from ablation import providers  # noqa: E402
 from ablation.__main__ import main  # noqa: E402
 from ablation.conditions import Item, build_stimuli, load_items, mcq_options  # noqa: E402
+from ablation.items import DEFAULT_GRAPH, DEFAULT_SCOPES, build_items, draft_review, load_gaming_rows, scope_counts  # noqa: E402
 from ablation.prompts import build_prompt, parse_response  # noqa: E402
-from ablation.runner import Budget, LiveCallRefused, run, run_one  # noqa: E402
+from ablation.runner import Budget, LiveCallRefused, Paced, run, run_one  # noqa: E402
 from ablation.scoring import score_rows, summarize, token_f1  # noqa: E402
 
 ITEMS = ROOT / "ablation" / "fixtures" / "synthetic_items.jsonl"
@@ -284,6 +285,177 @@ class ScoringTests(unittest.TestCase):
         self.assertEqual(token_f1("a b", "a b"), 1.0)
         self.assertEqual(token_f1("x", "y"), 0.0)
         self.assertAlmostEqual(token_f1("a b c", "a"), 0.5)
+
+
+class RetryAndPacingTests(unittest.TestCase):
+    def setUp(self):
+        self.stimulus = build_stimuli(load_items(ITEMS)[:1], conditions=("A1",), task="mcq")[0]
+
+    def test_transient_error_is_retried_then_succeeds(self):
+        provider = ScriptedProvider(providers.ProviderError("HTTP 429: slow down", status=429), VALID)
+        log, sleeps = [], []
+        result = run_one(provider, self.stimulus, "mcq", Budget(5), log.append,
+                         transient_retries=2, sleep=sleeps.append)
+        self.assertEqual((result["status"], result["attempts"], result["selected_option"]), ("ok", 1, "B"))
+        self.assertEqual([r["transient_try"] for r in log], [0, 1])
+        self.assertEqual(sleeps, [2.0])
+
+    def test_retries_consume_budget(self):
+        provider = ScriptedProvider(providers.ProviderError("HTTP 503", status=503), VALID)
+        result = run_one(provider, self.stimulus, "mcq", Budget(1), lambda r: None,
+                         transient_retries=2, sleep=lambda seconds: None)
+        self.assertEqual((result["status"], result["attempts"]), ("inference_failure", 1))
+        self.assertIn("HTTP 503", result["error"])
+        self.assertEqual(len(provider.prompts), 1)
+
+    def test_non_transient_errors_are_not_retried(self):
+        provider = ScriptedProvider(providers.ProviderError("HTTP 401", status=401), VALID)
+        log, sleeps = [], []
+        result = run_one(provider, self.stimulus, "mcq", Budget(5), log.append,
+                         transient_retries=2, sleep=sleeps.append)
+        self.assertEqual((result["status"], len(log), sleeps), ("inference_failure", 1, []))
+
+    def test_paced_provider_waits_between_calls(self):
+        clock, sleeps = [0.0], []
+
+        def sleep(seconds):
+            clock[0] += seconds
+            sleeps.append(seconds)
+
+        paced = Paced(ScriptedProvider(VALID, VALID), 5.0, clock=lambda: clock[0], sleep=sleep)
+        self.assertEqual((paced.name, paced.live), ("scripted", False))
+        paced.generate("a", [])
+        clock[0] = 2.0
+        paced.generate("b", [])
+        self.assertEqual(sleeps, [3.0])
+
+    def test_negative_retries_are_rejected_before_any_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "r"
+            with self.assertRaises(ValueError):
+                run(providers.MockProvider(), [self.stimulus], task="mcq", out_dir=out, max_calls=5,
+                    transient_retries=-1)
+            self.assertFalse(out.exists())
+
+
+class ItemDraftTests(unittest.TestCase):
+    @staticmethod
+    def _row(index, term, meaning, popular, usage, scope):
+        return {"Term": term, "Meaning": meaning, "Subject area": "Gaming", "Popular meaning": popular,
+                "Example usage": usage, "Source URL": "https://example.test/post",
+                "Occurrence ID": f"occ-{index}", "Term group ID": f"{index:024x}",
+                "original_row_index": index, "Selection basis": "TECHNIQUE",
+                "game_or_context_scopes": [scope]}
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        rows = [
+            self._row(1, "drift stack", "Boost charge from chained drifts.", "A pile of karts.",
+                      "Hold the drift to build a drift stack.", "Arena Alpha"),
+            self._row(2, "pebble call", "A callout that a shortcut is blocked.",
+                      "No established general sense", "Make the pebble call early.", "Arena Alpha"),
+            self._row(3, "glimmer dash", "A brief invulnerable dash.", "A sparkle effect.",
+                      "Glimmer dash off the ledge.", "Arena Alpha"),
+            self._row(4, "tidelock", "Trapped in water and unable to cast.", "Locking a skin.",
+                      "Tidelocked under the water zone.", "Arena Alpha"),
+            self._row(5, "ember sweep", "A low kick that resets a stance.", "A cleaning method.",
+                      "Ember sweep resets them.", "Arena Beta"),
+            self._row(6, "rune ping", "A signal marking a rune spawn.", "A sound effect.",
+                      "Ping the rune before it spawns.", "Arena Beta"),
+            self._row(7, "lane freeze", "Holding creeps in place near the tower.", "Cold weather.",
+                      "Lane freeze until minute five.", "Arena Beta"),
+            self._row(8, "bait swap", "Trading a cheap ability for a costly one.", "Fishing term.",
+                      "Bait swap before the fight.", "Arena Beta"),
+        ]
+        self.graph = self.root / "graph.json"
+        self.graph.write_text(json.dumps({"original_terms": rows}), encoding="utf-8")
+        self.review = self.root / "review.csv"
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    @staticmethod
+    def _read(path):
+        with path.open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle)
+            return reader.fieldnames, list(reader)
+
+    def test_draft_is_deterministic_and_flags_missing_popular_meaning(self):
+        other = self.root / "again.csv"
+        summary = draft_review(self.graph, ["Arena Alpha", "Arena Beta"], self.review, seed=3)
+        draft_review(self.graph, ["Arena Alpha", "Arena Beta"], other, seed=3)
+        self.assertEqual(self.review.read_bytes(), other.read_bytes())
+        _, rows = self._read(self.review)
+        by_term = {r["term"]: r for r in rows}
+        self.assertEqual(summary["rows"], 8)
+        self.assertIn("popular_meaning_missing", by_term["pebble call"]["flags"])
+        self.assertEqual(by_term["pebble call"]["distractor_1_source"], "same_scope_meaning")
+        self.assertTrue(all(r["keep"] == "" for r in rows))
+
+    def test_reviewed_sheet_builds_loadable_items(self):
+        draft_review(self.graph, ["Arena Alpha", "Arena Beta"], self.review, seed=3)
+        images = self.root / "images"
+        images.mkdir()
+        keep = {"drift stack": ("explicit", "high"), "tidelock": ("implicit", "low"),
+                "ember sweep": ("explicit", "high"), "rune ping": ("implicit", "low")}
+        fieldnames, rows = self._read(self.review)
+        for row in rows:
+            if row["term"] in keep:
+                row.update(keep="y", text_explicitness=keep[row["term"]][0],
+                           visual_groundability=keep[row["term"]][1],
+                           image_file=f"{row['term'].replace(' ', '_')}.png", image_source="own screenshot")
+                (images / row["image_file"]).write_bytes(b"\x89PNG " + row["term"].encode())
+        with self.review.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        out = self.root / "items.jsonl"
+        summary = build_items(self.review, images, out)
+        self.assertEqual((summary["items"], sorted(summary["by_community"])), (4, ["Arena Alpha", "Arena Beta"]))
+        items = load_items(out)
+        self.assertEqual(sorted(i.term for i in items), sorted(keep))
+        self.assertTrue(all(len(i.distractor_meanings) == 3 for i in items))
+        self.assertEqual(items[0].metadata["gold_status"], "provisional_single_reviewer")
+        with self.assertRaises(FileExistsError):
+            build_items(self.review, images, out)
+
+    def test_invalid_sheet_reports_every_problem_and_writes_nothing(self):
+        draft_review(self.graph, ["Arena Alpha"], self.review, seed=3)
+        fieldnames, rows = self._read(self.review)
+        rows[0].update(keep="y", text_explicitness="maybe", visual_groundability="high",
+                       image_file="missing.png")
+        with self.review.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        out = self.root / "items.jsonl"
+        with self.assertRaises(ValueError) as caught:
+            build_items(self.review, self.root, out)
+        message = str(caught.exception)
+        self.assertIn("text_explicitness must be one of", message)
+        self.assertIn("image not found", message)
+        self.assertIn("at least two communities", message)
+        self.assertFalse(out.exists())
+
+    def test_unknown_scope_and_overwrite_are_refused(self):
+        with self.assertRaises(ValueError):
+            draft_review(self.graph, ["No Such Game"], self.root / "x.csv")
+        draft_review(self.graph, ["Arena Alpha"], self.review)
+        with self.assertRaises(FileExistsError):
+            draft_review(self.graph, ["Arena Alpha"], self.review)
+
+
+class BundledGraphTests(unittest.TestCase):
+    def test_default_scopes_have_enough_terms(self):
+        counts = scope_counts(load_gaming_rows(DEFAULT_GRAPH))
+        for scope in DEFAULT_SCOPES:
+            self.assertGreaterEqual(counts[scope], 10, scope)
+
+    def test_cli_lists_scopes_without_writing(self):
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(main(["draft-items", "--list-scopes"]), 0)
+        self.assertIn("Super Smash Bros. Melee", out.getvalue())
 
 
 class HistoricalResultsTests(unittest.TestCase):
